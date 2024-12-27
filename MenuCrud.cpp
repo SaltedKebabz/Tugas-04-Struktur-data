@@ -59,6 +59,26 @@ void masukanBanyakData() {
     }
 }
 
+// Fungsi untuk menampilkan semua data mahasiswa
+void tampilkanSemuaData() {
+    clearScreen();
+    if (pos == -1) { // Jika tidak ada data
+        cout << "Belum ada data yang dimasukkan.\n";
+        return;
+    }
+
+    cout << "Data Mahasiswa:\n";
+    cout << "------------------------------------\n";
+    for (int i = 0; i <= pos; i++) {
+        cout << "Data ke-" << i + 1 << ":\n";
+        cout << "NIM     : " << sikc[i].nim << endl;
+        cout << "Nama    : " << sikc[i].nama << endl;
+        cout << "Alamat  : " << sikc[i].alamat << endl;
+        cout << "IPK     : " << sikc[i].ipk << endl;
+        cout << "------------------------------------\n";
+    }
+}
+
 int main() {
     int pilihan;
     do {
@@ -66,7 +86,8 @@ int main() {
         cout << "Menu Crud :\n";
         cout << "1. Masukkan Data\n";
         cout << "2. Masukkan Banyak Data\n";
-        cout << "3. Keluar\n";
+        cout << "3. Tampilkan Semua Data\n";
+        cout << "4. Keluar\n";
         cout << "Pilihan: ";
         cin >> pilihan;
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Membersihkan input buffer
@@ -79,6 +100,9 @@ int main() {
             masukanBanyakData();
             break;
         case 3:
+            tampilkanSemuaData();
+            break;
+        case 4:
             cout << "Keluar dari program.\n";
             break;
         default:
@@ -86,11 +110,11 @@ int main() {
             break;
         }
 
-        if (pilihan != 3) {
+        if (pilihan != 4) {
             cout << "\nTekan Enter untuk kembali ke menu...";
             cin.get();
         }
-    } while (pilihan != 3);
+    } while (pilihan != 4);
 
     return 0;
 }
