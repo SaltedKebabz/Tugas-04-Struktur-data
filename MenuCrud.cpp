@@ -103,6 +103,36 @@ void perbaruiData() {
     cout << "Data berhasil diperbarui!\n";
 }
 
+// Fungsi untuk menghapus data mahasiswa berdasarkan indeks
+void hapusData() {
+    clearScreen();
+    if (pos == -1) { // Jika tidak ada data
+        cout << "Belum ada data yang dimasukkan.\n";
+        return;
+    }
+
+    int index;
+    cout << "Masukkan indeks data yang ingin dihapus (1-" << pos + 1 << "): ";
+    cin >> index;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Membersihkan input buffer
+
+    if (index < 1 || index > pos + 1) {
+        cout << "Indeks tidak valid.\n";
+        return;
+    }
+
+    // Kurangi indeks dengan 1 untuk mencocokkan array
+    index--;
+
+    // Geser elemen setelah indeks yang dihapus ke kiri
+    for (int i = index; i < pos; i++) {
+        sikc[i] = sikc[i + 1];
+    }
+
+    pos--; // Kurangi jumlah data
+    cout << "Data berhasil dihapus!\n";
+}
+
 int main() {
     int pilihan;
     do {
@@ -111,7 +141,8 @@ int main() {
         cout << "1. Masukkan Data\n";
         cout << "2. Tampilkan Semua Data\n";
         cout << "3. Perbarui Data\n";
-        cout << "4. Keluar\n";
+        cout << "4. Hapus Data\n";
+        cout << "5. Keluar\n";
         cout << "Pilihan: ";
         cin >> pilihan;
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Membersihkan input buffer
@@ -127,6 +158,9 @@ int main() {
             perbaruiData();
             break;
         case 4:
+            hapusData();
+            break;
+        case 5:
             cout << "Keluar dari program.\n";
             break;
         default:
@@ -134,11 +168,11 @@ int main() {
             break;
         }
 
-        if (pilihan != 4) {
+        if (pilihan != 5) {
             cout << "\nTekan Enter untuk kembali ke menu...";
             cin.get();
         }
-    } while (pilihan != 4);
+    } while (pilihan != 5);
 
     return 0;
 }
